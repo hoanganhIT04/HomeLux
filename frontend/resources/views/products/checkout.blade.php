@@ -474,121 +474,59 @@
                                 </div>
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
-                                        <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
-                                        <form class="checkout-f__payment">
+                                        <h1 class="checkout-f__h1"><strong>THÔNG TIN THANH TOÁN</strong></h1>
+                                        <form class="checkout-f__payment" id="checkoutForm">
                                             <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
                                                 <div class="radio-box">
-
-                                                    <input type="radio" id="cash-on-delivery" name="payment">
+                                                    <input type="radio" id="cash-on-delivery" name="payment"
+                                                        value="cod">
                                                     <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="cash-on-delivery">Cash on
-                                                            Delivery</label>
+                                                        <label class="radio-box__label" for="cash-on-delivery">
+                                                            Thanh toán khi nhận hàng (COD)
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <!--====== End - Radio Box ======-->
 
-                                                <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery. (This service
-                                                    is only available for some countries)</span>
+                                                <span class="gl-text u-s-m-t-6">
+                                                    Bạn thanh toán trực tiếp cho nhân viên giao hàng khi nhận được sản
+                                                    phẩm.
+                                                </span>
                                             </div>
+
                                             <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
                                                 <div class="radio-box">
-
-                                                    <input type="radio" id="direct-bank-transfer" name="payment">
+                                                    <input type="radio" id="momo-wallet" name="payment" value="momo">
                                                     <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label"
-                                                            for="direct-bank-transfer">Direct Bank Transfer</label>
+                                                        <label class="radio-box__label" for="momo-wallet">
+                                                            Thanh toán bằng Ví MoMo
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <!--====== End - Radio Box ======-->
 
-                                                <span class="gl-text u-s-m-t-6">Make your payment directly into our bank
-                                                    account. Please use your Order ID as the payment reference. Your
-                                                    order will not be shipped until the funds have cleared in our
-                                                    account.</span>
+                                                <span class="gl-text u-s-m-t-6">
+                                                    Bạn sẽ được chuyển hướng sang Ví MoMo để thực hiện thanh toán an
+                                                    toàn và nhanh chóng.
+                                                </span>
                                             </div>
-                                            <div class="u-s-m-b-10">
 
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-with-check" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-with-check">Pay With
-                                                            Check</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">Please send a check to Store Name, Store
-                                                    Street, Store Town, Store State / County, Store Postcode.</span>
-                                            </div>
-                                            <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-with-card" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-with-card">Pay With
-                                                            Credit / Debit Card</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">International Credit Cards must be
-                                                    eligible for use within the United States.</span>
-                                            </div>
-                                            <div class="u-s-m-b-10">
-
-                                                <!--====== Radio Box ======-->
-                                                <div class="radio-box">
-
-                                                    <input type="radio" id="pay-pal" name="payment">
-                                                    <div class="radio-box__state radio-box__state--primary">
-
-                                                        <label class="radio-box__label" for="pay-pal">Pay Pal</label>
-                                                    </div>
-                                                </div>
-                                                <!--====== End - Radio Box ======-->
-
-                                                <span class="gl-text u-s-m-t-6">When you click "Place Order" below we'll
-                                                    take you to Paypal's site to set up your billing information.</span>
-                                            </div>
                                             <div class="u-s-m-b-15">
-
-                                                <!--====== Check Box ======-->
                                                 <div class="check-box">
-
                                                     <input type="checkbox" id="term-and-condition">
                                                     <div class="check-box__state check-box__state--primary">
-
-                                                        <label class="check-box__label" for="term-and-condition">I
-                                                            consent to the</label>
+                                                        <label class="check-box__label" for="term-and-condition">
+                                                            Tôi đồng ý với
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <!--====== End - Check Box ======-->
-
-                                                <a class="gl-link">Terms of Service.</a>
+                                                <a class="gl-link">Điều khoản dịch vụ.</a>
                                             </div>
 
 
+                                            <div>
+                                                <button class="btn btn--e-brand-b-2" type="submit">ĐẶT HÀNG</button>
+                                            </div>
                                         </form>
-                                        <div>
-                                            <form action="{{ url('vnpay_payment') }}" method="POST">
-                                                @csrf
-                                                <button class="btn btn--e-brand-b-2" type="submit">PLACE
-                                                    ORDER</button>
-                                            </form>
 
-                                        </div>
 
                                     </div>
                                 </div>
@@ -795,5 +733,48 @@
 </div>
 <!--====== End - Shipping Address Add Modal ======-->
 <!--====== End - Modal Section ======-->
+
+<!-- JS - Xử lý Momo -->
+<script>
+    document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+        e.preventDefault(); // ngăn submit mặc định
+
+        let method = document.querySelector('input[name="payment"]:checked').value;
+        let agree = document.getElementById('term-and-condition').checked;
+
+        if (!agree) {
+            alert("Bạn phải đồng ý Điều khoản dịch vụ");
+            return;
+        }
+
+        if (method === 'momo') {
+
+            // Gọi API Gateway
+            let response = await fetch("http://localhost:8001/api/checkout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    payment_method: "momo",
+                    amount: 379000 // tổng tiền thật
+                })
+            });
+
+            let data = await response.json();
+            if (data.payUrl) {
+                window.location.href = data.payUrl; // ← Redirect sang trang MoMo
+            } else {
+                alert("Không tạo được thanh toán MoMo");
+            }
+            return;
+        }
+
+        // Nếu COD → submit form thật
+        this.submit();
+    });
+</script>
+
+
 @endsection
 {{-- 4. Kết thúc phần nội dung --}}

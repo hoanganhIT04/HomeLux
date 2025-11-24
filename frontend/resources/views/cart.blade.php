@@ -377,11 +377,8 @@
                                             </table>
                                         </div>
                                         <div>
-                                            <form action="{{ url('vnpay_payment') }}" method="POST">
-                                                @csrf
-                                                <button class="btn btn--e-brand-b-2" type="submit"> PROCEED TO
-                                                    CHECKOUT</button>
-                                            </form>
+                                            <button class="btn btn--e-brand-b-2" type="submit"> PROCEED TO
+                                                CHECKOUT</button>
                                         </div>
                                     </div>
                                 </div>
