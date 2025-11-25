@@ -8,6 +8,7 @@
 
 {{-- 3. Bắt đầu phần nội dung (sẽ thay thế @yield('content')) --}}
 @section('content')
+
 <div class="app-content">
 
     <!--====== Section 1 ======-->
@@ -132,13 +133,15 @@
 
                                     <span class="dash__text">No payment options</span>
                                 </div>
+                                >>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--====== End - Section Content ======-->
+        <<<<<<< HEAD </div>
+            <!--====== End - Section Content ======-->
     </div>
     <!--====== End - Section 2 ======-->
 </div>

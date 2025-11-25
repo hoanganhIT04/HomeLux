@@ -634,6 +634,7 @@
 
     // Show Newsletter Modal
     RESHOP.showNewsletterModal = function () {
+<<<<<<< HEAD
         if ($('#newsletter-modal').length) {
             setTimeout(function () {
                 // Manually opens a modal
@@ -645,6 +646,23 @@
             }, 5000);
         }
     };
+=======
+        if (document.getElementById('newsletter-modal')) {
+            setTimeout(function () {
+
+                var modalEl = document.getElementById('newsletter-modal');
+
+                var myModal = new bootstrap.Modal(modalEl, {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                myModal.show();
+            }, 5000);
+        }
+    }
+
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
     // Check everything including DOM elements and images loaded
     $(window).on('load', function () {

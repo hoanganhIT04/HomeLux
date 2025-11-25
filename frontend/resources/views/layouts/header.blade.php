@@ -19,8 +19,13 @@
 
                     <label for="main-search"></label>
 
+<<<<<<< HEAD
                     <input class="input-text input-text--border-radius input-text--style-1" type="text" id="main-search"
                         placeholder="Search">
+=======
+                    <input class="input-text input-text--border-radius input-text--style-1" type="text"
+                        id="main-search" placeholder="Search">
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                     <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
                 </form>
@@ -66,11 +71,26 @@
                                             <span>Signin</span></a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
 
                                         <a href="{{ route('register') }}"><i class="fas fa-lock-open u-s-m-r-6"></i>
 
                                             <span>Signout</span></a>
                                     </li>
+=======
+                                        <a href="#"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-lock-open u-s-m-r-6"></i>
+                                            <span>Signout</span>
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                 </ul>
                                 <!--====== End - Dropdown ======-->
                             </li>
@@ -191,7 +211,11 @@
                                                     <a href="{{ route('shop.side_v2') }}"><i
                                                             class="fas fa-tv u-s-m-r-6"></i>
 
+<<<<<<< HEAD
                                                         <span>Electronics</span></a>
+=======
+                                                        <span>furniture</span></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                     <span class="js-menu-toggle js-toggle-mark"></span>
                                                 </li>
@@ -200,7 +224,11 @@
                                                     <a href="{{ route('shop.side_v2') }}"><i
                                                             class="fas fa-female u-s-m-r-6"></i>
 
+<<<<<<< HEAD
                                                         <span>Women's Clothing</span></a>
+=======
+                                                        <span>modern</span></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                     <span class="js-menu-toggle"></span>
                                                 </li>
@@ -209,6 +237,7 @@
                                                     <a href="{{ route('shop.side_v2') }}"><i
                                                             class="fas fa-male u-s-m-r-6"></i>
 
+<<<<<<< HEAD
                                                         <span>Men's Clothing</span></a>
 
                                                     <span class="js-menu-toggle"></span>
@@ -246,6 +275,9 @@
                                                             class="fas fa-heartbeat u-s-m-r-6"></i>
 
                                                         <span>Beauty & Health</span></a>
+=======
+                                                        <span>classic</span></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                     <span class="js-menu-toggle"></span>
                                                 </li>
@@ -261,6 +293,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">3D PRINTER &
                                                                 SUPPLIES</a>
                                                         </li>
@@ -281,6 +314,25 @@
 
                                                             <a href="{{ route('shop.side_v2') }}">3d Printer Module
                                                                 Board</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Lounge chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Office chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Gaming chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Rocking chair</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -288,6 +340,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">HOME AUDIO &
                                                                 VIDEO</a>
                                                         </li>
@@ -308,6 +361,25 @@
 
                                                             <a href="{{ route('shop.side_v2') }}">Home Theater
                                                                 System</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Coffee table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Office desk</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Nightstand</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Dining table</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -315,6 +387,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">MEDIA PLAYERS</a>
                                                         </li>
                                                         <li>
@@ -332,6 +405,26 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Microphones</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Wardrobe</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Shoe cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Bookshelf
+                                                                cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Display cabinet</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -339,6 +432,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">VIDEO GAME
                                                                 ACCESSORIES</a>
                                                         </li>
@@ -356,6 +450,21 @@
 
                                                             <a href="{{ route('shop.side_v2') }}">Xbox Video Games
                                                                 Accessories</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Wall shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Floating shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Corner shelves</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -369,6 +478,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">SECURITY &
                                                                 PROTECTION</a>
                                                         </li>
@@ -466,12 +576,28 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">DSLR Lenses</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">folding bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">single bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">double bed</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <!--====== End - Mega Menu Row ======-->
                                             <br>
+<<<<<<< HEAD
 
                                             <!--====== Mega Menu Row ======-->
                                             <div class="row">
@@ -511,11 +637,17 @@
                                                 </div>
                                             </div>
                                             <!--====== End - Mega Menu Row ======-->
+=======
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                         </div>
                                         <!--====== End - Electronics ======-->
 
 
+<<<<<<< HEAD
                                         <!--====== Women ======-->
+=======
+                                        <!--====== Modern ======-->
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                         <div class="mega-menu-content">
 
                                             <!--====== Mega Menu Row ======-->
@@ -526,7 +658,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-1.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-1.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mega-image">
@@ -535,7 +672,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-2.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-2.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                             </div>
@@ -548,6 +690,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">HOT CATEGORIES</a>
                                                         </li>
                                                         <li>
@@ -565,6 +708,28 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Rompers</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern dining
+                                                                chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Minimalist chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Contemporary
+                                                                armchair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Sleek office
+                                                                chair</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -572,6 +737,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">INTIMATES</a>
                                                         </li>
                                                         <li>
@@ -590,6 +756,27 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Panties</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern coffee
+                                                                table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Minimalist desk</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern dining
+                                                                table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Glass side table</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -597,6 +784,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">WEDDING & EVENTS</a>
                                                         </li>
                                                         <li>
@@ -614,6 +802,28 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Flower Dresses</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern wardrobe</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Sliding door
+                                                                cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern TV
+                                                                cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Handle-less kitchen
+                                                                cabinet</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -621,6 +831,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">BOTTOMS</a>
                                                         </li>
                                                         <li>
@@ -638,6 +849,29 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Jeans</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Floating wall
+                                                                shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Geometric
+                                                                shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Metal-frame
+                                                                shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern corner
+                                                                shelf</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -651,6 +885,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">OUTWEAR</a>
                                                         </li>
                                                         <li>
@@ -741,6 +976,25 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Sunglasses</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Platform bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Upholstered bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Modern queen bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Storage bed</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -756,7 +1010,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-3.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-3.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mega-image">
@@ -765,16 +1024,28 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-4.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-4.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--====== End - Mega Menu Row ======-->
                                         </div>
+<<<<<<< HEAD
                                         <!--====== End - Women ======-->
 
 
                                         <!--====== Men ======-->
+=======
+                                        <!--====== End - Modern ======-->
+
+
+                                        <!--====== Classic ======-->
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                         <div class="mega-menu-content">
 
                                             <!--====== Mega Menu Row ======-->
@@ -785,7 +1056,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-5.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-5.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 mega-image">
@@ -794,7 +1070,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-6.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-6.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 mega-image">
@@ -803,7 +1084,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-7.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-7.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                             </div>
@@ -816,6 +1102,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">HOT SALE</a>
                                                         </li>
                                                         <li>
@@ -833,6 +1120,29 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Shirts</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic carved
+                                                                armchair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Vintage lounge
+                                                                chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Antique dining
+                                                                chair</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Victorian accent
+                                                                chair</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -840,6 +1150,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">OUTWEAR</a>
                                                         </li>
                                                         <li>
@@ -857,6 +1168,29 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Sweaters</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic carved
+                                                                dining table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Antique coffee
+                                                                table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Vintage tea
+                                                                table</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic wooden
+                                                                desk</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -864,6 +1198,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">BOTTOMS</a>
                                                         </li>
                                                         <li>
@@ -881,6 +1216,27 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Shorts</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic wardrobe</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Antique display
+                                                                cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Vintage book
+                                                                cabinet</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Carved sideboard</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -888,6 +1244,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">UNDERWEAR</a>
                                                         </li>
                                                         <li>
@@ -905,6 +1262,29 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Socks</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic wooden
+                                                                shelves</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Carved wall
+                                                                shelf</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Vintage corner
+                                                                shelf</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Decorative
+                                                                bookshelf</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -918,6 +1298,7 @@
                                                     <ul>
                                                         <li class="mega-list-title">
 
+<<<<<<< HEAD
                                                             <a href="{{ route('shop.side_v2') }}">JACKETS</a>
                                                         </li>
                                                         <li>
@@ -1008,6 +1389,29 @@
                                                         <li>
 
                                                             <a href="{{ route('shop.side_v2') }}">Tech Accessories</a>
+=======
+                                                            <a href="{{ route('shop.side_v2') }}">bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Classic carved
+                                                                bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Vintage queen
+                                                                bed</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Royal-style bed
+                                                                frame</a>
+                                                        </li>
+                                                        <li>
+
+                                                            <a href="{{ route('shop.side_v2') }}">Antique wooden
+                                                                bed</a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1023,7 +1427,12 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-8.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-8.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mega-image">
@@ -1032,12 +1441,18 @@
                                                         <a class="u-d-block" href="{{ route('shop.side_v2') }}">
 
                                                             <img class="u-img-fluid u-d-block"
+<<<<<<< HEAD
                                                                 src="images/banners/banner-mega-9.jpg" alt=""></a>
+=======
+                                                                src="images/banners/banner-mega-9.jpg"
+                                                                alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--====== End - Mega Menu Row ======-->
                                         </div>
+<<<<<<< HEAD
                                         <!--====== End - Men ======-->
 
 
@@ -1067,6 +1482,9 @@
                                             <h5>No Categories</h5>
                                         </div>
                                         <!--====== End - No Sub Categories ======-->
+=======
+                                        <!--====== End - Classic ======-->
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                     </div>
                                 </div>
                                 <!--====== End - Mega Menu ======-->
@@ -1103,6 +1521,7 @@
 
                                 <span class="js-menu-toggle"></span>
                                 <ul style="width:170px">
+<<<<<<< HEAD
                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
                                         <a>Home<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
@@ -1329,6 +1748,8 @@
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
+=======
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                     <li>
 
                                         <a href="{{ route('cart') }}">Cart</a>
@@ -1370,6 +1791,7 @@
                                 <ul style="width:200px">
                                     <li>
 
+<<<<<<< HEAD
                                         <a href="{{ route('blog.LeftSidebar') }}">Blog Left Sidebar</a>
                                     </li>
                                     <li>
@@ -1378,19 +1800,25 @@
                                     </li>
                                     <li>
 
+=======
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                         <a href="{{ route('blog.SidebarNone') }}">Blog Sidebar None</a>
                                     </li>
                                     <li>
 
+<<<<<<< HEAD
                                         <a href="{{ route('blog.Masonry') }}">Blog Masonry</a>
                                     </li>
                                     <li>
 
+=======
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                         <a href="{{ route('blog.detail') }}">Blog Details</a>
                                     </li>
                                 </ul>
                                 <!--====== End - Dropdown ======-->
                             </li>
+<<<<<<< HEAD
                             <li>
 
                                 <a href="{{ route('shop.side_v2') }}">VALUE OF THE DAY</a>
@@ -1399,6 +1827,8 @@
 
                                 <a href="{{ route('shop.side_v2') }}">GIFT CARDS</a>
                             </li>
+=======
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                         </ul>
                         <!--====== End - List ======-->
                     </div>
@@ -1449,10 +1879,19 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
+<<<<<<< HEAD
                                                     <a class="mini-product__link" href="{{ route('products.detail') }}">
 
                                                         <img class="u-img-fluid"
                                                             src="images/product/electronic/product3.jpg" alt=""></a>
+=======
+                                                    <a class="mini-product__link"
+                                                        href="{{ route('products.detail') }}">
+
+                                                        <img class="u-img-fluid"
+                                                            src="images/product/electronic/product3.jpg"
+                                                            alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                 </div>
                                                 <div class="mini-product__info-wrapper">
 
@@ -1481,10 +1920,19 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
+<<<<<<< HEAD
                                                     <a class="mini-product__link" href="{{ route('products.detail') }}">
 
                                                         <img class="u-img-fluid"
                                                             src="images/product/electronic/product18.jpg" alt=""></a>
+=======
+                                                    <a class="mini-product__link"
+                                                        href="{{ route('products.detail') }}">
+
+                                                        <img class="u-img-fluid"
+                                                            src="images/product/electronic/product18.jpg"
+                                                            alt=""></a>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                 </div>
                                                 <div class="mini-product__info-wrapper">
 
@@ -1513,16 +1961,29 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
+<<<<<<< HEAD
                                                     <a class="mini-product__link" href="{{ route('products.detail') }}">
 
                                                         <img class="u-img-fluid" src="images/product/women/product8.jpg"
+=======
+                                                    <a class="mini-product__link"
+                                                        href="{{ route('products.detail') }}">
+
+                                                        <img class="u-img-fluid"
+                                                            src="images/product/women/product8.jpg"
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                             alt=""></a>
                                                 </div>
                                                 <div class="mini-product__info-wrapper">
 
                                                     <span class="mini-product__category">
 
+<<<<<<< HEAD
                                                         <a href="{{ route('shop.side_v2') }}">Women Clothing</a></span>
+=======
+                                                        <a href="{{ route('shop.side_v2') }}">Women
+                                                            Clothing</a></span>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                     <span class="mini-product__name">
 
@@ -1545,7 +2006,12 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
+<<<<<<< HEAD
                                                     <a class="mini-product__link" href="{{ route('products.detail') }}">
+=======
+                                                    <a class="mini-product__link"
+                                                        href="{{ route('products.detail') }}">
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                         <img class="u-img-fluid" src="images/product/men/product8.jpg"
                                                             alt=""></a>
@@ -1584,8 +2050,13 @@
                                         </div>
                                         <div class="mini-action">
 
+<<<<<<< HEAD
                                             <a class="mini-link btn--e-brand-b-2" href="{{ route('checkout') }}">PROCEED
                                                 TO
+=======
+                                            <a class="mini-link btn--e-brand-b-2"
+                                                href="{{ route('checkout') }}">PROCEED TO
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                 CHECKOUT</a>
 
                                             <a class="mini-link btn--e-transparent-secondary-b-2"
@@ -1608,4 +2079,8 @@
         </div>
     </nav>
     <!--====== End - Nav 2 ======-->
+<<<<<<< HEAD
 </header>
+=======
+</header>
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a

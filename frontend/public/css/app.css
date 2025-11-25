@@ -1083,6 +1083,13 @@ input::-ms-clear {
       .product-o__action-list > li > a:hover {
         background-color: #333333;
         color: #ffffff; }
+<<<<<<< HEAD
+=======
+.product-o__action-list li a i {
+    color: #fff !important; /* màu mặc định */
+    transition: 0.3s;
+}
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
 .product-o__category {
   display: block;
@@ -1982,7 +1989,11 @@ input::-ms-clear {
 
 .main-search-button {
   position: absolute;
+<<<<<<< HEAD
   top: 50%;
+=======
+  top: 70%;
+>>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
   right: 15px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);

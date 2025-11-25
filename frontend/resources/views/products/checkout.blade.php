@@ -81,8 +81,13 @@
                                                 </div>
                                                 <div class="u-s-m-b-15">
 
-                                                    <a class="gl-link" href="{{ route('password.request') }}">Lost Your
+                                                    <<<<<<< HEAD <a class="gl-link"
+                                                        href="{{ route('password.request') }}">Lost Your
                                                         Password?</a>
+                                                        =======
+                                                        <a class="gl-link" href="{{ route('password.request') }}">Lost
+                                                            Your Password?</a>
+                                                        >>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
                                                 </div>
                                             </div>
 
@@ -368,8 +373,14 @@
 
                                                     <span class="o-card__name">
 
-                                                        <a href="{{ route('products.detail') }}">Nikon DSLR Camera
-                                                            4k</a></span>
+                                                        <<<<<<< HEAD <a href="{{ route('products.detail') }}">Nikon DSLR
+                                                            Camera
+                                                            4k</a>
+                                                    </span>
+                                                    =======
+                                                    <a href="{{ route('products.detail') }}">Nikon DSLR Camera
+                                                        4k</a></span>
+                                                    >>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
                                                     <span class="o-card__quantity">Quantity x 1</span>
 
@@ -474,58 +485,62 @@
                                 </div>
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
-                                        <h1 class="checkout-f__h1"><strong>THÔNG TIN THANH TOÁN</strong></h1>
-                                        <form class="payment-form" id="checkoutForm">
-                                            <div class="u-s-m-b-10">
-                                                <div class="radio-box">
-                                                    <input type="radio" id="cash-on-delivery" name="payment"
-                                                        value="cod">
-                                                    <div class="radio-box__state radio-box__state--primary">
-                                                        <label class="radio-box__label" for="cash-on-delivery">
-                                                            Thanh toán khi nhận hàng (COD)
-                                                        </label>
+                                        <<<<<<< HEAD <h1 class="checkout-f__h1"><strong>THÔNG TIN THANH TOÁN</strong>
+                                            </h1>
+                                            <form class="payment-form" id="checkoutForm">
+                                                <div class="u-s-m-b-10">
+                                                    <div class="radio-box">
+                                                        <input type="radio" id="cash-on-delivery" name="payment"
+                                                            value="cod">
+                                                        <div class="radio-box__state radio-box__state--primary">
+                                                            <label class="radio-box__label" for="cash-on-delivery">
+                                                                Thanh toán khi nhận hàng (COD)
+                                                            </label>
+                                                        </div>
                                                     </div>
+
+                                                    <span class="gl-text u-s-m-t-6">
+                                                        Bạn thanh toán trực tiếp cho nhân viên giao hàng khi nhận được
+                                                        sản
+                                                        phẩm.
+                                                    </span>
                                                 </div>
 
-                                                <span class="gl-text u-s-m-t-6">
-                                                    Bạn thanh toán trực tiếp cho nhân viên giao hàng khi nhận được sản
-                                                    phẩm.
-                                                </span>
-                                            </div>
-
-                                            <div class="u-s-m-b-10">
-                                                <div class="radio-box">
-                                                    <input type="radio" id="momo-wallet" name="payment" value="momo">
-                                                    <div class="radio-box__state radio-box__state--primary">
-                                                        <label class="radio-box__label" for="momo-wallet">
-                                                            Thanh toán bằng Ví MoMo
-                                                        </label>
+                                                <div class="u-s-m-b-10">
+                                                    <div class="radio-box">
+                                                        <input type="radio" id="momo-wallet" name="payment"
+                                                            value="momo">
+                                                        <div class="radio-box__state radio-box__state--primary">
+                                                            <label class="radio-box__label" for="momo-wallet">
+                                                                Thanh toán bằng Ví MoMo
+                                                            </label>
+                                                        </div>
                                                     </div>
+
+                                                    <span class="gl-text u-s-m-t-6">
+                                                        Bạn sẽ được chuyển hướng sang Ví MoMo để thực hiện thanh toán an
+                                                        toàn và nhanh chóng.
+                                                    </span>
                                                 </div>
 
-                                                <span class="gl-text u-s-m-t-6">
-                                                    Bạn sẽ được chuyển hướng sang Ví MoMo để thực hiện thanh toán an
-                                                    toàn và nhanh chóng.
-                                                </span>
-                                            </div>
-
-                                            <div class="u-s-m-b-15">
-                                                <div class="check-box">
-                                                    <input type="checkbox" id="term-and-condition">
-                                                    <div class="check-box__state check-box__state--primary">
-                                                        <label class="check-box__label" for="term-and-condition">
-                                                            Tôi đồng ý với
-                                                        </label>
+                                                <div class="u-s-m-b-15">
+                                                    <div class="check-box">
+                                                        <input type="checkbox" id="term-and-condition">
+                                                        <div class="check-box__state check-box__state--primary">
+                                                            <label class="check-box__label" for="term-and-condition">
+                                                                Tôi đồng ý với
+                                                            </label>
+                                                        </div>
                                                     </div>
+                                                    <a class="gl-link">Điều khoản dịch vụ.</a>
                                                 </div>
-                                                <a class="gl-link">Điều khoản dịch vụ.</a>
-                                            </div>
 
 
-                                            <div>
-                                                <button class="btn btn--e-brand-b-2" type="submit">ĐẶT HÀNG</button>
-                                            </div>
-                                        </form>
+                                                <div>
+                                                    <button class="btn btn--e-brand-b-2" type="submit">ĐẶT HÀNG</button>
+                                                </div>
+                                            </form>
+
 
                                     </div>
                                 </div>
@@ -732,7 +747,6 @@
 </div>
 <!--====== End - Shipping Address Add Modal ======-->
 <!--====== End - Modal Section ======-->
-
 <!-- JS - Xử lý Momo -->
 <script>
     const form = document.querySelector('#checkoutForm');
@@ -781,8 +795,6 @@
         console.warn("Không tìm thấy form checkoutForm");
     }
 </script>
-
-
 
 <!--====== End - Shipping Address Add Modal ======-->
 <!--====== End - Modal Section ======-->
