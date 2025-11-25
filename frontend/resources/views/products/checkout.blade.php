@@ -475,7 +475,7 @@
                                 <div class="o-summary__section u-s-m-b-30">
                                     <div class="o-summary__box">
                                         <h1 class="checkout-f__h1"><strong>THÔNG TIN THANH TOÁN</strong></h1>
-                                        <form class="checkout-f__payment" id="checkoutForm">
+                                        <form class="payment-form" id="checkoutForm">
                                             <div class="u-s-m-b-10">
                                                 <div class="radio-box">
                                                     <input type="radio" id="cash-on-delivery" name="payment"
@@ -526,7 +526,6 @@
                                                 <button class="btn btn--e-brand-b-2" type="submit">ĐẶT HÀNG</button>
                                             </div>
                                         </form>
-
 
                                     </div>
                                 </div>
@@ -736,45 +735,57 @@
 
 <!-- JS - Xử lý Momo -->
 <script>
-    document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
-        e.preventDefault(); // ngăn submit mặc định
+    const form = document.querySelector('#checkoutForm');
 
-        let method = document.querySelector('input[name="payment"]:checked').value;
-        let agree = document.getElementById('term-and-condition').checked;
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-        if (!agree) {
-            alert("Bạn phải đồng ý Điều khoản dịch vụ");
-            return;
-        }
-
-        if (method === 'momo') {
-
-            // Gọi API Gateway
-            let response = await fetch("http://localhost:8001/api/checkout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    payment_method: "momo",
-                    amount: 379000 // tổng tiền thật
-                })
-            });
-
-            let data = await response.json();
-            if (data.payUrl) {
-                window.location.href = data.payUrl; // ← Redirect sang trang MoMo
-            } else {
-                alert("Không tạo được thanh toán MoMo");
+            const method = document.querySelector('input[name="payment"]:checked');
+            if (!method) {
+                alert("Chọn phương thức thanh toán.");
+                return;
             }
-            return;
-        }
 
-        // Nếu COD → submit form thật
-        this.submit();
-    });
+            const agree = document.querySelector('#term-and-condition').checked;
+            if (!agree) {
+                alert("Bạn phải đồng ý với điều khoản.");
+                return;
+            }
+
+            if (method.value === "momo") {
+
+                const res = await fetch("http://127.0.0.1:8004/api/momo/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                const data = await res.json();
+
+                if (data.payUrl) {
+                    window.location.href = data.payUrl;
+                } else {
+                    alert("Lỗi MoMo: không trả về payUrl!");
+                }
+
+                return;
+            }
+
+            if (method.value === "cod") {
+                alert("Đặt hàng COD thành công!");
+            }
+        });
+    } else {
+        console.warn("Không tìm thấy form checkoutForm");
+    }
 </script>
 
+
+
+<!--====== End - Shipping Address Add Modal ======-->
+<!--====== End - Modal Section ======-->
 
 @endsection
 {{-- 4. Kết thúc phần nội dung --}}
