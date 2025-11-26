@@ -634,19 +634,6 @@
 
     // Show Newsletter Modal
     RESHOP.showNewsletterModal = function () {
-<<<<<<< HEAD
-        if ($('#newsletter-modal').length) {
-            setTimeout(function () {
-                // Manually opens a modal
-                $('#newsletter-modal').modal({
-                    backdrop: 'static',
-                    keyboard: false,
-                    show: true
-                });
-            }, 5000);
-        }
-    };
-=======
         if (document.getElementById('newsletter-modal')) {
             setTimeout(function () {
 
@@ -662,7 +649,6 @@
         }
     }
 
->>>>>>> 690ae5fe94ec1111b08c0761137277878808417a
 
     // Check everything including DOM elements and images loaded
     $(window).on('load', function () {
