@@ -44,7 +44,7 @@
                         <div class="pd u-s-m-b-30">
                             <div class="slider-fouc pd-wrap">
                                 <div id="pd-o-initiate">
-                                    <div class="pd-o-img-wrap no-zoom" data-model="model3d/ASSET.glb">
+                                    <div class="pd-o-img-wrap no-zoom" data-model="uploads\model3d\1\ASSET.glb">
                                         <div id="model3D"
                                             style="width:100%; height:400px; background:#f1f1f1; border-radius:8px;">
                                         </div>
