@@ -63,6 +63,7 @@ class PaymentController extends Controller
         $orderId     = time();
         $orderInfo   = "Thanh toán đơn hàng #$orderId";
         $amount      = "1000";
+
         $redirectUrl = env('MOMO_REDIRECT_URL');
         $ipnUrl      = env('MOMO_IPN_URL');
         $requestId   = time();

@@ -1167,9 +1167,16 @@
 
                         <!--====== Product Detail ======-->
                         <div class="pd u-s-m-b-30">
-                            <div class="pd-wrap">
-                                <div id="js-product-detail-modal">
-                                    <div>
+
+                            <div class="slider-fouc pd-wrap">
+                                <div id="pd-o-initiate">
+                                    <div class="pd-o-img-wrap no-zoom"
+                                        data-model="uploads\model3d\4\office_chair_gaming_chair.glb">
+                                        <div id="model3D"
+                                            style="width:100%; height:400px; background:#f1f1f1; border-radius:8px;">
+                                        </div>
+                                    </div>
+                                    <div class="pd-o-img-wrap" data-src="images/product/product-d-2.jpg">
 
                                         <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt="">
                                     </div>
