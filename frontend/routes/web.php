@@ -77,7 +77,7 @@ Route::view('/lost_password', 'lost_password')->name('password.request');
 */
 
 Route::view('/dashboard', 'dashboard')
-    ->middleware('auth.token')
+    // ->middleware('auth.token')
     ->name('dashboard');
 
 Route::view('/dash_my_profile', 'dash.dash_my_profile')->name('dash.my_profile');
