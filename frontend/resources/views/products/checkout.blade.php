@@ -346,7 +346,7 @@
 
                                                     <span class="o-card__name">
 
-                                                        <a href="{{ route('products.detail') }}">Yellow Wireless
+                                                        <a href="#">Yellow Wireless
                                                             Headphone</a></span>
 
                                                     <span class="o-card__quantity">Quantity x 1</span>
@@ -368,7 +368,7 @@
 
                                                     <span class="o-card__name">
 
-                                                        <a href="{{ route('products.detail') }}">Nikon DSLR
+                                                        <a href="#">Nikon DSLR
                                                             Camera
                                                             4k</a>
                                                     </span>
@@ -393,7 +393,7 @@
 
                                                     <span class="o-card__name">
 
-                                                        <a href="{{ route('products.detail') }}">New Dress D Nice
+                                                        <a href="#">New Dress D Nice
                                                             Elegant</a></span>
 
                                                     <span class="o-card__quantity">Quantity x 1</span>
@@ -415,7 +415,7 @@
 
                                                     <span class="o-card__name">
 
-                                                        <a href="{{ route('products.detail') }}">New Fashion D Nice
+                                                        <a href="#">New Fashion D Nice
                                                             Elegant</a></span>
 
                                                     <span class="o-card__quantity">Quantity x 1</span>
