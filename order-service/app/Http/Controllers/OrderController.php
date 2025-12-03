@@ -27,13 +27,21 @@ class OrderController extends Controller
 
         // Tạo order
         $order = Order::create([
-            'user_id' => $request->user_id,
-            'public_id' => uniqid('order_'),
-            'total_price' => $total,
-            'status' => 'pending_payment',
+            'user_id'        => $request->user_id,
+            'public_id'      => uniqid('order_'),
+            'total_price'    => $total,
+            'status'         => 'pending_payment',
             'payment_method' => $request->payment_method,
-            'shipping_address' => $request->shipping_address,
+
+            'receiver_name'  => $request->receiver_name,
+            'receiver_phone' => $request->receiver_phone,
+            'receiver_email' => $request->receiver_email,
+
+            'street_address' => $request->street_address,
+            'city'           => $request->city,
+            'province_code'  => $request->province_code,
         ]);
+
 
         // Tạo order item
         foreach ($request->items as $item) {
