@@ -36,10 +36,21 @@ class ProductController extends Controller
     }
 
     // 2. SHOP (side_v2)
-    public function shop()
+    public function shop(Request $request)
     {
-        $categories = Http::get("$this->api/categories")->json();
-        $products   = Http::get("$this->api/products")->json();
+         $categories = Http::get("$this->api/categories")->json();
+
+        // Build query filter
+        $query = [
+            'category'  => $request->category,
+            'price_min' => $request->price_min,
+            'price_max' => $request->price_max,
+            'limit'     => $request->limit ?? 12,
+            'page'      => $request->page ?? 1,
+        ];
+
+        // Gọi API filter
+        $products = Http::get("$this->api/products/filter", $query)->json();
 
         return view('shop.shop_side_v2', compact('categories', 'products'));
     }

@@ -180,5 +180,74 @@ class ProductController {
         return $products;
     }
 
+    public function getFilteredProducts()
+    {
+        $db = (new \App\Database())->connect();
+
+        $category   = $_GET['category'] ?? null;
+        $price_min  = $_GET['price_min'] ?? null;
+        $price_max  = $_GET['price_max'] ?? null;
+        $limit      = $_GET['limit'] ?? 12;
+        $page       = $_GET['page'] ?? 1;
+
+        $offset = ($page - 1) * $limit;
+
+        $sql = "
+            SELECT p.*,
+                (SELECT image_url 
+                FROM product_images 
+                WHERE product_id = p.id AND is_primary = 1
+                LIMIT 1) AS primary_image
+            FROM products p
+            WHERE 1 = 1
+        ";
+
+        $params = [];
+
+        if ($category) {
+            $sql .= " AND p.category_id = ? ";
+            $params[] = $category;
+        }
+
+        if ($price_min) {
+            $sql .= " AND p.price >= ? ";
+            $params[] = $price_min;
+        }
+
+        if ($price_max) {
+            $sql .= " AND p.price <= ? ";
+            $params[] = $price_max;
+        }
+
+        // Count total
+        $countSql = "SELECT COUNT(*) FROM ($sql) AS x";
+        $countStmt = $db->prepare($countSql);
+        $countStmt->execute($params);
+        $total = $countStmt->fetchColumn();
+
+        // Pagination
+        $sql .= " LIMIT $limit OFFSET $offset ";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($products as &$p) {
+            if ($p['primary_image']) {
+                $p['primary_image'] = str_replace("\\", "/", $p['primary_image']);
+            }
+        }
+
+        return [
+            "data"         => $products,
+            "total"        => $total,
+            "per_page"     => $limit,
+            "current_page" => $page,
+            "last_page"    => ceil($total / $limit)
+        ];
+    }
+
+
     
 }

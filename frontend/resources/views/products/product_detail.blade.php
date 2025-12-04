@@ -20,22 +20,22 @@
                         <div class="pd-breadcrumb u-s-m-b-30">
                             <ul class="pd-breadcrumb__list">
                                 <li class="has-separator">
-
-                                    <a href="index.hml">Home</a>
+                                    <a href="{{ route('shop.index') }}">Home</a>
                                 </li>
+
                                 <li class="has-separator">
-
-                                    <a href="{{ route('shop.side_v2') }}">Electronics</a>
+                                    <a href="{{ route('shop.side_v2', ['category' => $category['id']]) }}">
+                                        {{ $category['name'] }}
+                                    </a>
                                 </li>
-                                <li class="has-separator">
 
-                                    <a href="{{ route('shop.side_v2') }}">DSLR Cameras</a>
-                                </li>
                                 <li class="is-marked">
-
-                                    <a href="{{ route('shop.side_v2') }}">Nikon Cameras</a>
+                                    <a href="{{ route('products.detail', $product['id']) }}">
+                                        {{ $product['name'] }}
+                                    </a>
                                 </li>
                             </ul>
+
                         </div>
                         <!--====== End - Product Breadcrumb ======-->
 
@@ -53,12 +53,13 @@
                                     </div>
 
                                     @foreach ($images as $img)
-                                        <div class="pd-o-img-wrap"
-                                            data-src="{{ asset(str_replace('\\', '/', $img['image_url'])) }}">
-                                            <img class="u-img-fluid"
+                                        <div class="pd-o-img-wrap" 
+                                            data-src="{{ asset(str_replace('\\', '/', $img['image_url'])) }}"
+                                            style="width:100%; height:400px; overflow:hidden; border-radius:8px; background:#f8f8f8;">
+                                            
+                                            <img class="product-detail-img"
                                                 src="{{ asset(str_replace('\\', '/', $img['image_url'])) }}"
-                                                data-zoom-image="{{ asset(str_replace('\\', '/', $img['image_url'])) }}"
-                                                alt="">
+                                                alt="{{ $product['name'] }}">
                                         </div>
                                     @endforeach
                                 </div>
@@ -67,9 +68,11 @@
                             <div class="u-s-m-t-15">
                                 <div class="slider-fouc">
                                     <div id="pd-o-thumbnail">
-                                        <div style="width:80px; height:80px; border-radius:6px; overflow:hidden; position:relative;">
+                                        <div
+                                            style="width:80px; height:80px; border-radius:6px; overflow:hidden; position:relative;">
                                             <!-- CHẶN MỌI TƯƠNG TÁC -->
-                                            <div style="
+                                            <div
+                                                style="
                                                 position:absolute;
                                                 top:0;
                                                 left:0;
@@ -77,16 +80,12 @@
                                                 height:100%;
                                                 z-index:10;
                                                 cursor:default;
-                                            "></div>
+                                            ">
+                                            </div>
 
-                                            <model-viewer 
-                                                src="{{ asset(str_replace('\\', '/', $product['model_url'])) }}"
-                                                interaction-prompt="none"
-                                                disable-zoom
-                                                disable-pan
-                                                disable-tap
-                                                camera-controls
-                                                style="width:100%; height:100%; background:#f1f1f1;">
+                                            <model-viewer src="{{ asset(str_replace('\\', '/', $product['model_url'])) }}"
+                                                interaction-prompt="none" disable-zoom disable-pan disable-tap
+                                                camera-controls style="width:100%; height:100%; background:#f1f1f1;">
                                             </model-viewer>
                                         </div>
 

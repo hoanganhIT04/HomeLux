@@ -129,5 +129,12 @@ if (preg_match("#^/products/category/(\d+)/limit/(\d+)$#", $uri, $matches) && $m
     exit;
 }
 
+// GET /products/filter → filter + pagination
+if ($uri === "/products/filter" && $method === "GET") {
+    echo json_encode($product->getFilteredProducts());
+    exit;
+}
+
+
 // Mặc định
 echo json_encode(["status" => "Product service running"]);
