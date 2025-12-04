@@ -189,6 +189,7 @@ class ProductController {
         $price_max  = $_GET['price_max'] ?? null;
         $limit      = $_GET['limit'] ?? 12;
         $page       = $_GET['page'] ?? 1;
+        $search     = $_GET['search'] ?? null;
 
         $offset = ($page - 1) * $limit;
 
@@ -204,33 +205,39 @@ class ProductController {
 
         $params = [];
 
-        if ($category) {
+        if (!empty($category)) {
             $sql .= " AND p.category_id = ? ";
             $params[] = $category;
         }
 
-        if ($price_min) {
+        if (!empty($price_min)) {
             $sql .= " AND p.price >= ? ";
             $params[] = $price_min;
         }
 
-        if ($price_max) {
+        if (!empty($price_max)) {
             $sql .= " AND p.price <= ? ";
             $params[] = $price_max;
         }
 
-        // Count total
-        $countSql = "SELECT COUNT(*) FROM ($sql) AS x";
+        $search = $_GET['search'] ?? null;
+
+        if (!empty($search)) {
+            $sql .= " AND p.name LIKE ? ";
+            $params[] = "%$search%";
+        }
+
+
+        // Count
+        $countSql = "SELECT COUNT(*) FROM ($sql) AS temp";
         $countStmt = $db->prepare($countSql);
         $countStmt->execute($params);
         $total = $countStmt->fetchColumn();
 
-        // Pagination
         $sql .= " LIMIT $limit OFFSET $offset ";
 
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
-
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($products as &$p) {
@@ -240,13 +247,14 @@ class ProductController {
         }
 
         return [
-            "data"         => $products,
-            "total"        => $total,
-            "per_page"     => $limit,
+            "data" => $products,
+            "total" => $total,
+            "per_page" => $limit,
             "current_page" => $page,
-            "last_page"    => ceil($total / $limit)
+            "last_page" => ceil($total / $limit)
         ];
     }
+
 
 
     

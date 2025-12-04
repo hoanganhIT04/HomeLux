@@ -20,8 +20,7 @@
                     <label for="main-search"></label>
 
                     <input class="input-text input-text--border-radius input-text--style-1" type="text"
-                        id="main-search" placeholder="Search">
-
+                        id="main-search" name="search" placeholder="Search">
                     <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
                 </form>
                 <!--====== End - Search Form ======-->
@@ -906,8 +905,7 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
-                                                    <a class="mini-product__link"
-                                                        href="#">
+                                                    <a class="mini-product__link" href="#">
 
                                                         <img class="u-img-fluid"
                                                             src="{{ asset('images/product/electronic/product3.jpg') }}"
@@ -940,8 +938,7 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
-                                                    <a class="mini-product__link"
-                                                        href="#">
+                                                    <a class="mini-product__link" href="#">
 
                                                         <img class="u-img-fluid"
                                                             src="{{ asset('images/product/electronic/product18.jpg') }}"
@@ -974,8 +971,7 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
-                                                    <a class="mini-product__link"
-                                                        href="#">
+                                                    <a class="mini-product__link" href="#">
 
                                                         <img class="u-img-fluid"
                                                             src="{{ asset('images/product/women/product8.jpg') }}"
@@ -1009,10 +1005,10 @@
                                             <div class="mini-product">
                                                 <div class="mini-product__image-wrapper">
 
-                                                    <a class="mini-product__link"
-                                                        href="#">
+                                                    <a class="mini-product__link" href="#">
 
-                                                        <img class="u-img-fluid" src="{{ asset('images/product/men/product8.jpg') }}"
+                                                        <img class="u-img-fluid"
+                                                            src="{{ asset('images/product/men/product8.jpg') }}"
                                                             alt=""></a>
                                                 </div>
                                                 <div class="mini-product__info-wrapper">

@@ -38,7 +38,7 @@ class ProductController extends Controller
     // 2. SHOP (side_v2)
     public function shop(Request $request)
     {
-         $categories = Http::get("$this->api/categories")->json();
+        $categories = Http::get("$this->api/categories")->json();
 
         // Build query filter
         $query = [
@@ -47,6 +47,7 @@ class ProductController extends Controller
             'price_max' => $request->price_max,
             'limit'     => $request->limit ?? 12,
             'page'      => $request->page ?? 1,
+            'search'    => $request->search, // <--- thêm dòng này
         ];
 
         // Gọi API filter
@@ -54,6 +55,7 @@ class ProductController extends Controller
 
         return view('shop.shop_side_v2', compact('categories', 'products'));
     }
+
 
     // 3. Filter theo Category
     public function byCategory($id)
