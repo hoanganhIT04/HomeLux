@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: http://127.0.0.1:8000");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
@@ -134,6 +135,34 @@ if ($uri === "/products/filter" && $method === "GET") {
     echo json_encode($product->getFilteredProducts());
     exit;
 }
+
+// GET /products/{id}/primary-image
+if (preg_match("#^/products/(\d+)/primary-image$#", $uri, $matches) && $method === "GET") {
+    echo json_encode($image->getPrimaryImage((int)$matches[1]));
+    exit;
+}
+
+// GET /categories/{id}
+// if (preg_match("#^/categories/(\d+)$#", $uri, $matches) && $method === "GET") {
+//     echo json_encode($category->getCategoryById((int)$matches[1]));
+//     exit;
+// }
+
+// POST /products/decrease-stock
+if ($method === 'POST' && $uri === '/api/products/decrease-stock') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    echo json_encode($product->decreaseStock($data['items']));
+    exit;
+}
+
+// HOÀN HÀNG
+if ($method === 'POST' && $uri === '/api/products/restore-stock') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    echo json_encode($product->restoreStock($data['items']));
+    exit;
+}
+
+
 
 
 // Mặc định

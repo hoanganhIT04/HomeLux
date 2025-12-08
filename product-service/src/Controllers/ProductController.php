@@ -4,16 +4,21 @@ namespace App\Controllers;
 
 use App\Database;
 use PDO;
+use PDOException;
 
-class ProductController {
+
+class ProductController
+{
 
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = (new Database())->connect();
     }
 
-    public function getAllProducts() {
+    public function getAllProducts()
+    {
         $db = (new \App\Database())->connect();
 
         $stmt = $db->prepare("
@@ -39,14 +44,16 @@ class ProductController {
     }
 
 
-    public function getProductById($id) {
+    public function getProductById($id)
+    {
         $sql = "SELECT * FROM products WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: ["error" => "Product not found"];
     }
 
-    public function createProduct($data) {
+    public function createProduct($data)
+    {
         $sql = "INSERT INTO products (name, price, image, description, category_id)
                 VALUES (?, ?, ?, ?, ?)";
 
@@ -62,7 +69,8 @@ class ProductController {
         return ["ok" => true, "message" => "Product created"];
     }
 
-    public function updateProduct($id, $data) {
+    public function updateProduct($id, $data)
+    {
         $sql = "UPDATE products 
                 SET name=?, price=?, image=?, description=?, category_id=?
                 WHERE id=?";
@@ -80,7 +88,8 @@ class ProductController {
         return ["ok" => true, "message" => "Product updated"];
     }
 
-    public function deleteProduct($id) {
+    public function deleteProduct($id)
+    {
         $sql = "DELETE FROM products WHERE id=?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
@@ -88,7 +97,8 @@ class ProductController {
         return ["ok" => true, "message" => "Product deleted"];
     }
 
-    public function getProductsByCategoryId($categoryId) {
+    public function getProductsByCategoryId($categoryId)
+    {
         $sql = "SELECT * FROM products WHERE category_id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$categoryId]);
@@ -255,7 +265,67 @@ class ProductController {
         ];
     }
 
+    // Tồn kho
+
+    public function decreaseStock($items)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            foreach ($items as $item) {
+
+                // Kiểm tra đủ hàng hay không
+                $check = $this->db->prepare("
+                    SELECT quantity FROM products WHERE id = ?
+                ");
+                $check->execute([$item['product_id']]);
+                $qty = $check->fetchColumn();
+
+                if ($qty < $item['quantity']) {
+                    $this->db->rollBack();
+                    return ["error" => "Not enough stock for product ID " . $item['product_id']];
+                }
+
+                // Trừ hàng
+                $stmt = $this->db->prepare("
+                    UPDATE products
+                    SET quantity = quantity - ?
+                    WHERE id = ?
+                ");
+                $stmt->execute([$item['quantity'], $item['product_id']]);
+            }
+
+            $this->db->commit();
+            return ["message" => "Stock decreased"];
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return ["error" => $e->getMessage()];
+        }
+    }
 
 
-    
+    // ===============================
+    // KHÔI PHỤC TỒN KHO (HUỶ ĐƠN)
+    // ===============================
+    public function restoreStock($items)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            foreach ($items as $item) {
+                $stmt = $this->db->prepare("
+                    UPDATE products
+                    SET quantity = quantity + ?
+                    WHERE id = ?
+                ");
+                $stmt->execute([$item['quantity'], $item['product_id']]);
+            }
+
+            $this->db->commit();
+            return ["message" => "Stock restored"];
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return ["error" => $e->getMessage()];
+        }
+    }
 }
