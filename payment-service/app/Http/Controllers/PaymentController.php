@@ -145,10 +145,10 @@ class PaymentController extends Controller
             }
 
             // Redirect user to UI
-            return redirect('http://127.0.0.1:8000/checkout?paid=true');
+            return redirect('http://127.0.0.1:8000/cart?paid=true');
         }
 
         // Payment failed / cancelled -> do nothing (no order created)
-        return redirect('http://127.0.0.1:8000/checkout?failed=true');
+        return redirect('http://127.0.0.1:8000/cart?failed=true');
     }
 }

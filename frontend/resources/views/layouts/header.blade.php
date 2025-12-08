@@ -1030,7 +1030,7 @@
                                 })
                                 .then(() => {
                                     loadMiniCart(); // reload dropdown
-                                    location.reload(); // reload cả trang
+                                    //location.reload(); // reload cả trang
                                 });
                         });
                     });

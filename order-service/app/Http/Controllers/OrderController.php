@@ -50,6 +50,40 @@ class OrderController extends Controller
             ]);
         }
 
+        // COD
+        // Test khi đã paid
+        // if ($request->payment_method === "cod") {
+        //     $order->status = "paid";
+        //     $order->save();
+
+        //     $this->decreaseProductStock($order->id);
+
+        //     CartItem::where('user_id', $request->user_id)->delete();
+        // }
+
+        if ($request->payment_method === "cod") {
+
+            // Bước 1: set trạng thái ban đầu = draft
+            $order->status = "draft";
+            $order->save();
+
+            // Bước 2: gọi cập nhật trạng thái → hệ thống tự trừ hàng
+            $this->updatePaymentStatus(new Request([
+                'order_id' => $order->public_id,
+                'status'   => 'pending_payment'
+            ]));
+
+            // Xóa giỏ hàng
+            CartItem::where('user_id', $request->user_id)->delete();
+
+            return response()->json([
+                'message' => 'Đặt hàng COD thành công',
+                'order_id' => $order->public_id,
+                'shipping_fee' => $shippingFee,
+                'total' => $total
+            ]);
+        }
+
         return response()->json([
             'message' => 'Tạo đơn hàng thành công',
             'order_id' => $order->public_id,
@@ -68,41 +102,54 @@ class OrderController extends Controller
             'amount'  => 'required|numeric',
         ]);
 
-        $total = $request->amount; // MoMo đã xác nhận số tiền
-        $shippingFee = $request->shipping_fee ?? 0;
+        DB::beginTransaction();
+        try {
+            $total = $request->amount; // MoMo đã xác nhận số tiền
+            $shippingFee = $request->shipping_fee ?? 0;
 
-        $order = Order::create([
-            'user_id'        => $request->user_id,
-            'public_id'      => uniqid('order_'),
-            'total_price'    => $total,
-            'status'         => 'paid',
-            'payment_method' => 'momo',
+            $order = Order::create([
+                'user_id'        => $request->user_id,
+                'public_id'      => uniqid('order_'),
+                'total_price'    => $total,
+                'status'         => 'paid',
+                'payment_method' => 'momo',
 
-            'receiver_name'  => $request->receiver_name,
-            'receiver_phone' => $request->receiver_phone,
-            'receiver_email' => $request->receiver_email,
+                'receiver_name'  => $request->receiver_name,
+                'receiver_phone' => $request->receiver_phone,
+                'receiver_email' => $request->receiver_email,
 
-            'street_address' => $request->street_address,
-            'district_name'  => $request->district_name,
-            'province_code'  => $request->province_code,
-        ]);
-
-        foreach ($request->items as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $item['product_id'],
-                'product_name' => $item['product_name'],
-                'price' => $item['price'],
-                'quantity' => $item['quantity'],
-                'subtotal' => $item['price'] * $item['quantity'],
+                'street_address' => $request->street_address,
+                'district_name'  => $request->district_name,
+                'province_code'  => $request->province_code,
             ]);
-        }
 
-        return response()->json([
-            'message' => 'Tạo đơn (paid) thành công',
-            'order_id' => $order->public_id,
-            'total' => $total
-        ]);
+            foreach ($request->items as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'product_name' => $item['product_name'],
+                    'price' => $item['price'],
+                    'quantity' => $item['quantity'],
+                    'subtotal' => $item['price'] * $item['quantity'],
+                ]);
+            }
+
+            CartItem::where('user_id', $request->user_id)->delete();
+
+            $this->decreaseProductStock($order->id);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Tạo đơn (paid) thành công',
+                'order_id' => $order->public_id,
+                'total' => $total
+            ]);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::error('createPaidOrder error: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal server error'], 500);
+        }
     }
 
     public function calculateShipping(Request $request, ShippingFeeService $shippingFeeService)
@@ -125,11 +172,36 @@ class OrderController extends Controller
             return response()->json(['error' => 'Order not found'], 404);
         }
 
-        $order->status = $request->status;
+        $oldStatus = $order->status;
+        $newStatus = $request->status;
+
+        $order->status = $newStatus;
         $order->save();
+
+        // ========================
+        // STOCK CONTROL LOGIC
+        // ========================
+
+        // 1) Trừ hàng khi new = pending_payment hoặc paid
+        // nhưng chỉ trừ nếu old không phải pending_payment hoặc paid
+        $shouldDecrease =
+            in_array($newStatus, ['pending_payment', 'paid']) &&
+            !in_array($oldStatus, ['pending_payment', 'paid']);
+
+        if ($shouldDecrease) {
+            $this->decreaseProductStock($order->id);
+        }
+
+        // 2) Hoàn hàng khi new = cancelled
+        // và old != cancelled (tránh hoàn lại nhiều lần)
+        if ($newStatus === 'cancelled' && $oldStatus !== 'cancelled') {
+            $this->restoreProductStock($order->id);
+        }
 
         return response()->json(['message' => 'Order status updated']);
     }
+
+
 
     public function checkoutFromCart(Request $request, ShippingFeeService $shippingFeeService)
     {
@@ -141,7 +213,7 @@ class OrderController extends Controller
             'receiver_phone' => 'nullable|string',
             // 'receiver_email' => 'nullable|email', // nếu cần
             'street_address' => 'nullable|string',
-            'city' => 'nullable|string',
+            'district_name' => 'nullable|string',
         ]);
 
         $userId = $request->input('user_id');
@@ -174,7 +246,7 @@ class OrderController extends Controller
                 'receiver_phone' => $request->receiver_phone,
                 'receiver_email' => $request->receiver_email,
                 'street_address' => $request->street_address,
-                'city' => $request->city,
+                'district_name' => $request->district_name,
                 'province_code' => $request->province_code,
             ]);
 
@@ -204,6 +276,65 @@ class OrderController extends Controller
             DB::rollBack();
             Log::error('checkoutFromCart error: ' . $e->getMessage());
             return response()->json(['error' => 'Internal server error'], 500);
+        }
+    }
+
+    // Xử lý tồn kho (trừ hàng)
+    private function decreaseProductStock($orderId)
+    {
+        $items = OrderItem::where('order_id', $orderId)->get();
+
+        if ($items->isEmpty()) {
+            return;
+        }
+
+        $payload = [
+            "items" => $items->map(function ($i) {
+                return [
+                    "product_id" => $i->product_id,
+                    "quantity" => $i->quantity
+                ];
+            })
+        ];
+
+        try {
+            $client = new \GuzzleHttp\Client();
+
+            $client->post("http://127.0.0.1:8003/api/products/decrease-stock", [
+                "json" => $payload,
+                "timeout" => 5,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error("Failed to decrease stock: " . $e->getMessage());
+        }
+    }
+
+
+    // Xử lý tồn kho (hoàn trả hàng)
+    private function restoreProductStock($orderId)
+    {
+        $items = OrderItem::where('order_id', $orderId)->get();
+
+        if ($items->isEmpty()) return;
+
+        $payload = [
+            "items" => $items->map(function ($i) {
+                return [
+                    "product_id" => $i->product_id,
+                    "quantity" => $i->quantity
+                ];
+            })
+        ];
+
+        try {
+            $client = new \GuzzleHttp\Client();
+
+            $client->post("http://127.0.0.1:8003/api/products/restore-stock", [
+                "json" => $payload,
+                "timeout" => 5,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error("Failed to restore stock: " . $e->getMessage());
         }
     }
 }

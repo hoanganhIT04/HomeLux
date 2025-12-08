@@ -350,7 +350,10 @@
                         method: "DELETE"
                     })
                     .then(res => res.json())
-                    .then(() => location.reload());
+                    .then(() => {
+                        if (window.loadMiniCart) window.loadMiniCart(); // cập nhật dropdown
+                        location.reload();
+                    })
             });
         });
 

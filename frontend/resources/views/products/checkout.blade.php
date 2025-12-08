@@ -128,60 +128,14 @@
                             <!--====== Order Summary ======-->
                             <div class="o-summary">
                                 <div class="o-summary__section u-s-m-b-30">
-                                    <div class="o-summary__item-wrap gl-scroll">
-                                        <div class="o-card" data-product-id="1">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
 
-                                                    <img class="u-img-fluid"
-                                                        src="images/product/electronic/product3.jpg" alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-
-                                                    <span class="o-card__name">
-
-                                                        <a href="#">Yellow Wireless
-                                                            Headphone</a></span>
-
-                                                    <span class="o-card__quantity">Quantity x 1</span>
-
-                                                    <span class="o-card__price">0 đ</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="o-card__del far fa-trash-alt"></a>
-                                        </div>
-
-                                        <div class="o-card" data-product-id="2">
-                                            <div class="o-card__flex">
-                                                <div class="o-card__img-wrap">
-
-                                                    <img class="u-img-fluid"
-                                                        src="images/product/electronic/product18.jpg" alt="">
-                                                </div>
-                                                <div class="o-card__info-wrap">
-
-                                                    <span class="o-card__name">
-
-                                                        <a href="#">Nikon DSLR
-                                                            Camera
-                                                            4k</a>
-                                                    </span>
-
-
-                                                    <span class="o-card__quantity">Quantity x 1</span>
-
-                                                    <span class="o-card__price">0 đ</span>
-                                                </div>
-                                            </div>
-
-                                            <a class="o-card__del far fa-trash-alt"></a>
-                                        </div>
+                                    <div class="o-summary__item-wrap gl-scroll" id="checkout-items">
+                                        <!-- JS sẽ render sản phẩm thật từ API -->
                                     </div>
 
                                 </div>
-
                             </div>
+
 
                         </div>
                     </div>
@@ -270,17 +224,8 @@
         </div>
     </div>
 </div>
-</div>
 <!--====== End - Section Content ======-->
-</div>
-<!--====== End - Section 3 ======-->
-</div>
-<!--====== End - App Content ======-->
 
-<!--====== End - Shipping Address Add Modal ======-->
-
-
-<!--====== End - Modal Section ======-->
 <!-- Thanh toán - Xử lý Momo -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -294,10 +239,13 @@
         const grandTotalEl = document.getElementById('grand-total-display');
         const taxDisplay = document.getElementById('tax-display');
 
+        const checkoutList = document.getElementById("checkout-items"); // THÊM
+        const API_CART = "http://127.0.0.1:8002/api/cart"; // THÊM
+
         districtSelect.disabled = true;
 
         // ===========================
-        // Load PROVINCES
+        // PROVINCES
         // ===========================
         fetch("https://provinces.open-api.vn/api/p/")
             .then(r => r.json())
@@ -311,7 +259,6 @@
                 });
             });
 
-        // Load DISTRICTS
         provinceSelect.addEventListener("change", function() {
             const provinceCode = this.value;
 
@@ -355,6 +302,88 @@
             }
         }
 
+        const USER_ID = getUserIdFromJWT();
+        if (!USER_ID) {
+            // alert("Bạn phải đăng nhập để thanh toán.");
+            window.location.href = "/signin";
+            return;
+        }
+
+        // ===========================
+        // TẢI CART TỪ API → RENDER CHECKOUT
+        // ===========================
+        function loadCheckoutCart() {
+
+            fetch(`${API_CART}?user_id=${USER_ID}`)
+                .then(r => r.json())
+                .then(data => {
+
+                    checkoutList.innerHTML = ""; // Clear danh sách
+
+                    const items = data.items ?? [];
+
+                    items.forEach(item => {
+
+                        checkoutList.innerHTML += `
+                        <div class="o-card" data-product-id="${item.product_id}" data-cart-id="${item.id}">
+                            <div class="o-card__flex">
+                                <div class="o-card__img-wrap">
+                                    <img class="u-img-fluid" src="${item.primary_image}" alt="">
+                                </div>
+
+                                <div class="o-card__info-wrap">
+                                    <span class="o-card__name">
+                                        <a href="/product/${item.product_id}">
+                                            ${item.product_name}
+                                        </a>
+                                    </span>
+
+                                    <span class="o-card__quantity">Số lượng x ${item.quantity}</span>
+                                    <span class="o-card__price" style="color:#7F7F7F;">Giá thành: ${fmt(item.price)}</span>
+                                    <span class="o-card__subtotal" style="color:#ff4500; font-weight:bold;">Tổng: ${fmt(item.price * item.quantity)}</span>
+                                </div>
+                            </div>
+
+                            <a class="o-card__del far fa-trash-alt" data-id="${item.id}"></a>
+                        </div>
+                    `;
+                    });
+
+                    // Recompute subtotal
+                    computeSubtotalFromDOM();
+
+                    // Attach event delete
+                    attachDeleteEvents();
+                });
+        }
+
+        loadCheckoutCart();
+
+
+        // ===========================
+        // XÓA ITEM TRONG CHECKOUT
+        // ===========================
+        function attachDeleteEvents() {
+            document.querySelectorAll(".o-card__del").forEach(btn => {
+                btn.onclick = async () => {
+
+                    await fetch(`${API_CART}/${btn.dataset.id}`, {
+                        method: "DELETE"
+                    });
+
+                    // Cập nhật danh sách checkout
+                    await loadCheckoutCart();
+
+                    // Cập nhật dropdown
+                    if (typeof window.loadMiniCart === "function") {
+                        await window.loadMiniCart();
+                    }
+                };
+            });
+        }
+
+
+
         // ===========================
         // SUBTOTAL
         // ===========================
@@ -379,15 +408,14 @@
         function updateGrandTotal() {
             const subtotal = Number(subtotalEl.dataset.value || 0);
             const ship = Number(shippingDisplay.dataset.value || 0);
-            const tax = Number(taxDisplay.dataset.value || 0);
+            const tax = Number(taxDisplay?.dataset.value || 0);
 
             grandTotalEl.innerText = fmt(subtotal + ship + tax);
         }
 
-        computeSubtotalFromDOM();
 
         // ===========================
-        // API tính phí ship
+        // SHIPPING
         // ===========================
         function calculateShipping(provinceCode) {
             return fetch("http://127.0.0.1:8002/api/calculate-shipping", {
@@ -415,11 +443,51 @@
                 .catch(() => alert("Không tính được phí giao hàng."));
         });
 
+        function validateCheckout() {
+            const name = document.getElementById("receiver_name").value.trim();
+            const phone = document.getElementById("receiver_phone").value.trim();
+            const email = document.getElementById("receiver_email").value.trim();
+            const address = document.getElementById("street_address").value.trim();
+
+            const nameRegex = /^[\p{L}\s]{2,50}$/u;
+            const phoneRegex = /^0\d{9}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const addressRegex = /^[\w\p{L}\s\/\-,.]{5,100}$/u;
+
+            if (!nameRegex.test(name)) {
+                alert("Họ và tên không hợp lệ.");
+                return false;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert("Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0).");
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert("Email không hợp lệ.");
+                return false;
+            }
+
+            if (!addressRegex.test(address)) {
+                alert("Địa chỉ không hợp lệ.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
         // ===========================
         // SUBMIT CHECKOUT
+        // GIỮ NGUYÊN CODE CŨ CỦA BẠN
         // ===========================
         formCheckout.addEventListener("submit", async function(e) {
             e.preventDefault();
+
+            // ======= Validate front-end =======
+            if (!validateCheckout()) return;
 
             const paymentMethod = document.querySelector('input[name="payment"]:checked');
             if (!paymentMethod) return alert("Vui lòng chọn phương thức thanh toán.");
@@ -427,6 +495,7 @@
             if (!document.getElementById("term-and-condition").checked)
                 return alert("Bạn phải đồng ý điều khoản.");
 
+            // Lấy dữ liệu form
             const receiver_name = document.getElementById("receiver_name").value.trim();
             const receiver_phone = document.getElementById("receiver_phone").value.trim();
             const receiver_email = document.getElementById("receiver_email").value.trim();
@@ -434,11 +503,13 @@
             const district_code = districtSelect.value;
             const province_code = provinceSelect.value;
 
+            // Kiểm tra trống
             if (!receiver_name || !receiver_phone || !receiver_email || !street_address || !
                 district_code || !province_code) {
                 return alert("Vui lòng nhập đầy đủ thông tin giao hàng.");
             }
 
+            // Lấy items trong checkout
             const items = [];
             document.querySelectorAll(".o-card").forEach(card => {
                 items.push({
@@ -452,11 +523,8 @@
                 });
             });
 
-            const userId = getUserIdFromJWT();
-            if (!userId) return alert("Bạn phải đăng nhập trước khi đặt hàng!");
-
             const payloadBase = {
-                user_id: userId,
+                user_id: USER_ID,
                 receiver_name,
                 receiver_phone,
                 receiver_email,
@@ -468,9 +536,22 @@
                 amount: Number(grandTotalEl.innerText.replace(/[^0-9]/g, ""))
             };
 
-            // ===========================
-            // COD
-            // ===========================
+            // ================================================================
+            //                    HANDLE VALIDATION (422)
+            // ================================================================
+            async function handleValidationResponse(res) {
+                if (res.status === 422) {
+                    const err = await res.json();
+                    const firstError = Object.values(err.errors)[0][0];
+                    alert(firstError);
+                    return true; // Có lỗi
+                }
+                return false; // Không lỗi
+            }
+
+            // ================================================================
+            //                        COD CHECKOUT
+            // ================================================================
             if (paymentMethod.value === "cod") {
                 const res = await fetch("http://127.0.0.1:8002/api/checkout", {
                     method: "POST",
@@ -483,14 +564,23 @@
                     })
                 });
 
+                // Check lỗi validate từ backend
+                if (await handleValidationResponse(res)) return;
+
                 const data = await res.json();
+
                 alert("Đặt hàng COD thành công. Mã đơn: " + data.order_id);
+
+                // Reload dropdown cart
+                if (typeof loadMiniCart === "function") await loadMiniCart();
+
+                window.location.href = "/cart";
                 return;
             }
 
-            // ===========================
-            // MOMO FLOW (CHUẨN)
-            // ===========================
+            // ================================================================
+            //                        MOMO CHECKOUT
+            // ================================================================
             if (paymentMethod.value === "momo") {
                 const momoRes = await fetch("http://127.0.0.1:8004/api/momo/create", {
                     method: "POST",
@@ -500,6 +590,9 @@
                     body: JSON.stringify(payloadBase)
                 });
 
+                // Check lỗi validate từ backend
+                if (await handleValidationResponse(momoRes)) return;
+
                 const momoData = await momoRes.json();
 
                 if (!momoData.payUrl) {
@@ -508,19 +601,39 @@
                     return;
                 }
 
-                // Redirect sang MoMo
                 window.location.href = momoData.payUrl;
             }
-
         });
+
 
     });
 </script>
 
+<style>
+    /* Làm phần đơn hàng rộng ngang với cột phải */
+    .o-summary__item-wrap {
+        max-height: none !important;
+        /* bỏ giới hạn chiều cao */
+        height: auto !important;
+        /* tự giãn */
+        overflow: visible !important;
+        /* bỏ scroll ngang/dọc */
+        padding-right: 0 !important;
+        /* bỏ khoảng thừa */
+    }
 
+    /* Cho mỗi o-card full width */
+    .o-card {
+        width: 100% !important;
+        display: block;
+    }
 
-<!--====== End - Shipping Address Add Modal ======-->
-<!--====== End - Modal Section ======-->
+    /* Nếu cần sát mép hơn */
+    .o-summary__section {
+        padding-right: 0 !important;
+    }
+</style>
+
 
 @endsection
 {{-- 4. Kết thúc phần nội dung --}}
