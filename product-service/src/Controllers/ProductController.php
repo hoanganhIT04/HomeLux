@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Database;
 use PDO;
+use PDOException;
+
 
 class ProductController
 {
@@ -261,5 +263,69 @@ class ProductController
             "current_page" => $page,
             "last_page" => ceil($total / $limit)
         ];
+    }
+
+    // Tồn kho
+
+    public function decreaseStock($items)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            foreach ($items as $item) {
+
+                // Kiểm tra đủ hàng hay không
+                $check = $this->db->prepare("
+                    SELECT quantity FROM products WHERE id = ?
+                ");
+                $check->execute([$item['product_id']]);
+                $qty = $check->fetchColumn();
+
+                if ($qty < $item['quantity']) {
+                    $this->db->rollBack();
+                    return ["error" => "Not enough stock for product ID " . $item['product_id']];
+                }
+
+                // Trừ hàng
+                $stmt = $this->db->prepare("
+                    UPDATE products
+                    SET quantity = quantity - ?
+                    WHERE id = ?
+                ");
+                $stmt->execute([$item['quantity'], $item['product_id']]);
+            }
+
+            $this->db->commit();
+            return ["message" => "Stock decreased"];
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return ["error" => $e->getMessage()];
+        }
+    }
+
+
+    // ===============================
+    // KHÔI PHỤC TỒN KHO (HUỶ ĐƠN)
+    // ===============================
+    public function restoreStock($items)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            foreach ($items as $item) {
+                $stmt = $this->db->prepare("
+                    UPDATE products
+                    SET quantity = quantity + ?
+                    WHERE id = ?
+                ");
+                $stmt->execute([$item['quantity'], $item['product_id']]);
+            }
+
+            $this->db->commit();
+            return ["message" => "Stock restored"];
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return ["error" => $e->getMessage()];
+        }
     }
 }
