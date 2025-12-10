@@ -35,3 +35,5 @@ Bootstrap / TailwindCSS
 php -S 127.0.0.1:8001
 php artisan serve --host=127.0.0.1 --port=8000
 php artisan serve --port=8004
+php -S 127.0.0.1:8003 -t . index.php
+php artisan serve --port=8002
